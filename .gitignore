@@ -1,0 +1,9 @@
+bin/
+include/
+lib/
+lib64/
+pyvenv.cfg
+clinic/__pycache__/
+menan/__pycache__/
+doctor/__pycache__/
+service/__pycache__/
