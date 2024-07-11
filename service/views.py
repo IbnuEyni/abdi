@@ -8,7 +8,7 @@ import logging
 
 logger = logging.getLogger(__name__)
 
-def service(request):
+def services(request):
     servs = Services.objects.all()
     smiles = Smile.objects.all()
     logger.info(f"Services: {servs}")

@@ -17,32 +17,42 @@
 		
 		<section class="ftco-section">
       <div class="container">
-      	<div class="row justify-content-center mb-5 pb-5">
+      	{% comment %} <div class="row justify-content-center mb-5 pb-5">
           <div class="col-md-7 text-center heading-section ftco-animate">
             <h2 class="mb-3">Meet Our Experience Dentist</h2>
             <p>A small river named Duden flows by their place and supplies it with the necessary regelialia. It is a paradisematic country, in which roasted parts of sentences</p>
           </div>
-        </div>
+        </div> {% endcomment %}
+		<div class="row justify-content-center mb-5 pb-5">
+			{% for doct in docTitle%}
+			<div class="col-md-7 text-center heading-section ftco-animate">
+			  <h2 class="mb-3">{{doct.title}}</h2>
+			  <p>{{doct.desc}}</p>
+			</div>
+			{%endfor%}
+		</div>
         <div class="row">
+			{% for dentist in dentists%}
         	<div class="col-lg-3 col-md-6 d-flex mb-sm-4 ftco-animate">
         		<div class="staff">
-      				<div class="img mb-4" style="background-image: url({% static 'menanapp/images/person_5.jpg' %});"></div>
+      				<div class="img mb-4" style="background-image: url( {{dentists.image.url}});"></div>
       				<div class="info text-center">
-      					<h3><a href="teacher-single.html">Tom Smith</a></h3>
-      					<span class="position">Dentist</span>
+      					<h3><a href="teacher-single.html">{{dentist.name}}</a></h3>
+      					<span class="position">{{dentist.prof}}</span>
       					<div class="text">
-	        				<p>Far far away, behind the word mountains, far from the countries Vokalia</p>
+	        				<p>{{dentist.desc}}</p>
 	        				<ul class="ftco-social">
-			              <li class="ftco-animate"><a href="#"><span class="icon-twitter"></span></a></li>
-			              <li class="ftco-animate"><a href="#"><span class="icon-facebook"></span></a></li>
-			              <li class="ftco-animate"><a href="#"><span class="icon-instagram"></span></a></li>
-			              <li class="ftco-animate"><a href="#"><span class="icon-google-plus"></span></a></li>
+			              <li class="ftco-animate"><a href="{{dentist.X}}"><span class="icon-twitter"></span></a></li>
+			              <li class="ftco-animate"><a href="{{dentist.fb}}"><span class="icon-facebook"></span></a></li>
+			              <li class="ftco-animate"><a href="{{dentist.insta}}"><span class="icon-instagram"></span></a></li>
+			              <li class="ftco-animate"><a href="{{dentist.google}}"><span class="icon-google-plus"></span></a></li>
 			            </ul>
 	        			</div>
       				</div>
         		</div>
         	</div>
-        	<div class="col-lg-3 col-md-6 d-flex mb-sm-4 ftco-animate">
+			{% endfor %}
+        	{% comment %} <div class="col-lg-3 col-md-6 d-flex mb-sm-4 ftco-animate">
         		<div class="staff">
       				<div class="img mb-4" style="background-image: url({% static 'menanapp/images/person_6.jpg' %});"></div>
       				<div class="info text-center">
@@ -167,7 +177,7 @@
 	        			</div>
       				</div>
         		</div>
-        	</div>
+        	</div> {% endcomment %}
         </div>
       </div>
     </section>
