@@ -43,8 +43,8 @@
                 <li class="nav-item active"><a href="{% url 'home' %}" class="nav-link">Home</a></li>
                 <li class="nav-item"><a href="{% url 'about' %}" class="nav-link">About</a></li>
                 <li class="nav-item"><a href="{% url 'services' %}" class="nav-link">Services</a></li>
-                <li class="nav-item"><a href="{% url 'doctors' %}" class="nav-link">Doctors</a></li>
-                <li class="nav-item"><a href="{% url 'blog' %}" class="nav-link">Blog</a></li>
+                <li class="nav-item"><a href="{% url 'doctor:doctors' %}" class="nav-link">Doctors</a></li>
+                <li class="nav-item"><a href="{% url 'blog:blog' %}" class="nav-link">Blog</a></li>
                 <li class="nav-item"><a href="{% url 'contact' %}" class="nav-link">Contact</a></li>
                 <li class="nav-item cta"><a href="{% url 'contact' %}" class="nav-link" data-toggle="modal" data-target="#modalRequest"><span>Make an Appointment</span></a></li>
                 </ul>
@@ -70,62 +70,66 @@
                 </ul>
                 </div>
                 <div class="col-md-2">
-                <div class="ftco-footer-widget mb-4 ml-md-5">
-                    <h2 class="ftco-heading-2">Quick Links</h2>
-                    <ul class="list-unstyled">
-                    <li><a href="#" class="py-2 d-block">About</a></li>
-                    <li><a href="#" class="py-2 d-block">Features</a></li>
-                    <li><a href="#" class="py-2 d-block">Projects</a></li>
-                    <li><a href="#" class="py-2 d-block">Blog</a></li>
-                    <li><a href="#" class="py-2 d-block">Contact</a></li>
-                    </ul>
-                </div>
+                    <div class="ftco-footer-widget mb-4 ml-md-5">
+                        <h2 class="ftco-heading-2">Quick Links</h2>
+                        <ul class="list-unstyled">
+                        <li><a href="#" class="py-2 d-block">About</a></li>
+                        <li><a href="#" class="py-2 d-block">Features</a></li>
+                        <li><a href="#" class="py-2 d-block">Projects</a></li>
+                        <li><a href="#" class="py-2 d-block">Blog</a></li>
+                        <li><a href="#" class="py-2 d-block">Contact</a></li>
+                        </ul>
+                    </div>
                 </div>
                 <div class="col-md-4 pr-md-4">
                 <div class="ftco-footer-widget mb-4">
                     <h2 class="ftco-heading-2">Recent Blog</h2>
+                    {% for blg in blgs%}
                     <div class="block-21 mb-4 d-flex">
-                    <a class="blog-img mr-4" style="background-image: url({% static 'menanapp/images/image_1.jpg' %});"></a>
-                    <div class="text">
-                        <h3 class="heading"><a href="#">Even the all-powerful Pointing has no control about</a></h3>
-                        <div class="meta">
-                        <div><a href="#"><span class="icon-calendar"></span> Sept 15, 2018</a></div>
-                        <div><a href="#"><span class="icon-person"></span> Admin</a></div>
-                        <div><a href="#"><span class="icon-chat"></span> 19</a></div>
+                        <a class="blog-img mr-4" style="background-image: url({{blg.image.url}});"></a>
+                        <div class="text">
+                            <h3 class="heading"><a href="#">{{blg.title}}</a></h3>
+                            <div class="meta">
+                            <div><a href="#"><span class="icon-calendar"></span>{{blg.created_at}}</a></div>
+                            <div><a href="#"><span class="icon-person"></span> {{blg.author}}</a></div>
+                            <div><a href="#"><span class="icon-chat"></span> {{blg.comments_count}}</a></div>
+                            </div>
                         </div>
                     </div>
-                    </div>
-                    <div class="block-21 mb-4 d-flex">
-                    <a class="blog-img mr-4" style="background-image: url({% static 'menanapp/images/image_2.jpg' %});"></a>
-                    <div class="text">
-                        <h3 class="heading"><a href="#">Even the all-powerful Pointing has no control about</a></h3>
-                        <div class="meta">
-                        <div><a href="#"><span class="icon-calendar"></span> Sept 15, 2018</a></div>
-                        <div><a href="#"><span class="icon-person"></span> Admin</a></div>
-                        <div><a href="#"><span class="icon-chat"></span> 19</a></div>
+                    {%endfor%}
+                    {% comment %} <div class="block-21 mb-4 d-flex">           
+                        <a class="blog-img mr-4" style="background-image: url({% static 'menanapp/images/image_2.jpg' %});"></a>
+                        <div class="text">
+                            <h3 class="heading"><a href="#">Even the all-powerful Pointing has no control about</a></h3>
+                            <div class="meta">
+                            <div><a href="#"><span class="icon-calendar"></span> Sept 15, 2018</a></div>
+                            <div><a href="#"><span class="icon-person"></span> Admin</a></div>
+                            <div><a href="#"><span class="icon-chat"></span> 19</a></div>
+                            </div>
                         </div>
-                    </div>
-                    </div>
+                    </div> {% endcomment %}
                 </div>
                 </div>
                 <div class="col-md-3">
-                <div class="ftco-footer-widget mb-4">
-                    <h2 class="ftco-heading-2">Office</h2>
-                    <div class="block-23 mb-3">
-                        <ul>
-                        <li><span class="icon icon-map-marker"></span><span class="text">203 Fake St. Mountain View, San Francisco, California, USA</span></li>
-                        <li><a href="#"><span class="icon icon-phone"></span><span class="text">+2 392 3929 210</span></a></li>
-                        <li><a href="#"><span class="icon icon-envelope"></span><span class="text">info@yourdomain.com</span></a></li>
-                        </ul>
+                    <div class="ftco-footer-widget mb-4">
+                        <h2 class="ftco-heading-2">Office</h2>
+                        {%for cont in contacts%}
+                        <div class="block-23 mb-3">
+                            <ul>
+                            <li><span class="icon icon-map-marker"></span><span class="text">{{cont.address}}</span></li>
+                            <li><a href="#"><span class="icon icon-phone"></span><span class="text">{{cont.phone}}</span></a></li>
+                            <li><a href="#"><span class="icon icon-envelope"></span><span class="text">{{cont.email}}</span></a></li>
+                            </ul>
+                        </div>
+                        {%endfor%}
                     </div>
-                </div>
                 </div>
             </div>
             <div class="row">
                 <div class="col-md-12 text-center">
     
                 <p><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-        Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="icon-heart" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
+        Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="icon-heart" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Amir</a>
         <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. --></p>
                 </div>
             </div>

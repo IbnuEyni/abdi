@@ -4,15 +4,15 @@ from django.conf.urls.static import static
 from django.urls import path
 from . import views
 
+# app_name = 'menan'
+
 urlpatterns = [
     path('', views.home, name='home'),
     path('contact.html', views.contact, name='contact'),
     path('about.html', views.about, name='about'),
-    path('blog.html', views.blog, name='blog'),
-    path('services', views.services, name='services'),
-    path('doctors', views.doctors, name='doctors'),
-
+    # path('blog.html', views.blog, name='blog'),
+    # path('menan/<int:pk>/', views.blog_detail, name='blog_detail'),
 ]
 
-if settings.DEBUG:
-    urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+# if settings.DEBUG:
+#     urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

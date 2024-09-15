@@ -1,61 +1,71 @@
-from django.shortcuts import render
+from django.shortcuts import redirect, render
 from django.core.mail import send_mail
-from .models import Dentist, Testimonials
+from .models import *
+from blog.models import Blog
+
 
 def home(requests):
+    sliders = Slider.objects.all()
     dents = Dentist.objects.all()
     tests = Testimonials.objects.all()
+    contacts = Contact.objects.all()
+    blg = Blog.objects.all()
+    blgs = blg[:2]
     # dent1 = Dentist()
     # dent1.name = "Tom Smith"
     # dent1.prof = "Dentist"
     # dent1.desc = "Far far away, behind the word mountains, far from the countries Vokalia"
-
-    # dent2 = Dentist()
-    # dent2.name = "Mark Wilson"
-    # dent2.prof = "Dentist"
-    # dent2.desc = "Far far away, behind the word mountains, far from the countries Vokalia"
-
-    # dent3 = Dentist()
-    # dent3.name = "Patrick Jacobson"
-    # dent3.prof = "Dentist"
-    # dent3.desc = "Far far away, behind the word mountains, far from the countries Vokalia"
-
-    # dent4 = Dentist()
-    # dent4.name = "Ivan Dorchsner"
-    # dent4.prof = "System Analyst"
-    # dent4.desc = "Far far away, behind the word mountains, far from the countries Vokalia"
-
     # dents = [dent1, dent2, dent3, dent4]
 
-    return render(requests, 'index.html', {'dents': dents, 'tests': tests})
+    return render(requests, 'index.html', {'dents': dents, 'tests': tests, 'sliders':sliders, 'blgs':blgs, 'contacts':contacts})
 
 def contact(request):
+    slider = Slider.objects.all()
+    sliderss = slider[:1]
+    contacts = Contact.objects.all()
+    blg = Blog.objects.all()
+    blgs = blg[:2]
+
     if request.method == 'POST':
-        message_name = request.POST['message-name']
-        message_email = request.POST['message-email']
-        message_subject = request.POST['message-subject']
-        umessage = request.POST['umessage']
+        message_name = request.POST.get('message-name')
+        message_email = request.POST.get('message-email')
+        message_subject = request.POST.get('message-subject')
+        umessage = request.POST.get('umessage')
 
-        send_mail(
-            message_name, #User name
-            message_subject, # Message Subject
-            umessage, # Messages
-            message_email, # from email
-            ['mirahaem5@gmail.com'], # To email
-        )
-
-        return render(request, 'contact.html', {'message_name': message_name})
+        try:
+            send_mail(
+                message_subject, # Email subject
+                umessage, # Email message
+                message_email, # From email
+                ['readshare192@gmail.com'], # To email  
+                fail_silently=False,
+            )
+            return render(request, 'contact.html', {'sliderss': sliderss, 'contacts': contacts, 'message_name': message_name, 'success': True, 'blgs':blgs})
+        except Exception as e:
+            return render(request, 'contact.html', {'sliderss': sliderss, 'contacts':contacts, 'message_name': message_name, 'error': str(e), 'blgs':blgs})
     else:
-        return render(request, 'contact.html', {})
-
+        return render(request, 'contact.html', {'sliderss': sliderss, 'contacts':contacts, 'blgs':blgs})
 def about(request):
-    return render(request, 'about.html', {})
+    slider = Slider.objects.all()
+    sliders = slider[:1]
+    mission = Our_mission.objects.all()
+    goal = Our_goal.objects.all()
+    action = What_we_do.objects.all()
+    persons = Abt_Presonal.objects.all()
+    blg = Blog.objects.all()
+    blgs = blg[:2]
+    contacts = Contact.objects.all()
+    res = {
+        "missions":mission,
+        "goals": goal,
+        "actions":action,
+        "persons":persons,
+        "sliders":sliders,
+        'blgs':blgs, 
+        'contacts':contacts
 
-def blog(request):
-    return render(request, 'blog.html', {})
+    }
+    return render(request, 'about.html', res)
 
-def services(request):
-    return render(request, 'services.html', {})
 
-def doctors(request):
-    return render(request, 'doctors.html', {})
+

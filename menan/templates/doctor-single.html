@@ -1,0 +1,77 @@
+{%  extends "base.html" %}
+{% load static%}
+
+{% block content %}
+
+    <section class="home-slider owl-carousel">
+		{% for slider in sliders%}
+      <div class="slider-item bread-item" style="background-image: url({{slider.image.url}});" data-stellar-background-ratio="0.5">
+        <div class="overlay"></div>
+        <div class="container" data-scrollax-parent="true">
+          <div class="row slider-text align-items-end">
+            <div class="col-md-7 col-sm-12 ftco-animate mb-5">
+              <p class="breadcrumbs" data-scrollax=" properties: { translateY: '70%', opacity: 1.6}"><span class="mr-2"><a href="index.html">Home</a></span> <span>About</span></p>
+              <h1 class="mb-3" data-scrollax=" properties: { translateY: '70%', opacity: .9}">{{ dentist.name }}</h1>
+            </div>
+          </div>
+        </div>
+      </div>
+	  {%endfor%}
+    </section>
+    <section class="ftco-section-2">
+    	<div class="container-wrap">
+			{%for dentist in dentists%}
+      	<div class="row d-flex no-gutters">
+      		<div class="col-md-6 img" style="background-image: url({{dentist.image.url}});">
+      		</div>
+      		<div class="col-md-6 d-flex">
+      			<div class="about-wrap">
+					{%for person in persons%}
+      				<div class="heading-section heading-section-white mb-5 ftco-animate">
+		            <h2 class="mb-2">{{person.abt_heading1}}</h2>
+		            <p>{{person.h1_desc}} </p>
+		          </div>
+      				<div class="list-services d-flex ftco-animate">
+      					<div class="icon d-flex justify-content-center align-items-center">
+      						<span class="icon-check2"></span>
+      					</div>
+      					<div class="text">
+	      					<h3>{{person.heading21}} </h3>
+	      					<p> {{person.heading21_desc}} </p>
+      					</div>
+      				</div>
+      				<div class="list-services d-flex ftco-animate">
+      					<div class="icon d-flex justify-content-center align-items-center">
+      						<span class="icon-check2"></span>
+      					</div>
+      					<div class="text">
+	      					<h3>High Technology Facilities {{person.heading22}} </h3>
+	      					<p>{{person.heading22_desc}} </p>
+      					</div>
+      				</div>
+      				<div class="list-services d-flex ftco-animate">
+      					<div class="icon d-flex justify-content-center align-items-center">
+      						<span class="icon-check2"></span>
+      					</div>
+      					<div class="text">
+	      					<h3>{{person.heading23}} </h3>
+	      					<p> {{person.heading23_desc}} </p>
+      					</div>
+      				</div>
+					<p>{{dentist.desc}}</p>
+					<ul class="ftco-social">
+						<li class="ftco-animate"><a href="{{dentist.X}}"><span class="icon-twitter"></span></a></li>
+						<li class="ftco-animate"><a href="http://facebook.com/johndo"><span class="icon-facebook"></span></a></li>
+						<li class="ftco-animate"><a href="{{dentist.insta}}"><span class="icon-instagram"></span></a></li>
+						<li class="ftco-animate"><a href="{{dentist.google}}"><span class="icon-google-plus"></span></a></li>
+					</ul>
+					{%endfor%}
+      			</div>
+      		</div>
+      	</div>
+		{%endfor%}
+      </div>
+    </section>
+
+
+{%endblock%}

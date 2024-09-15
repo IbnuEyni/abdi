@@ -4,8 +4,11 @@ from django.conf.urls.static import static
 from django.urls import path
 from . import views
 
+app_name = 'doctor'
+
 urlpatterns = [
     path('', views.doctors, name='doctors'),
-]
-if settings.DEBUG:
-    urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+    path('<int:pk>', views.doctor_detail, name='doctor_detail')
+]   
+# if settings.DEBUG:
+#     urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
