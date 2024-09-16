@@ -67,7 +67,7 @@ def contact(request):
                 subject=message_subject,           # Email subject
                 message=full_message,              # Email message
                 from_email=message_email,  # From email (must be your email)
-                recipient_list=['readshare192@gmail.com'],  # To email
+                recipient_list=[settings.EMAIL_HOST_USER],  # To email
                 fail_silently=False,
             )
             return render(request, 'contact.html', {
