@@ -24,8 +24,8 @@ urlpatterns = [
     path('', include("menan.urls")),
     path('service/', include('service.urls')),
     path('doctor/', include('doctor.urls')),
-    path('blog/', include('blog.urls'))
-    # path('api-auth/', include('rest_framework.urls')),
+    path('blog/', include('blog.urls')),
+    path('account/', include('account.urls')),
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

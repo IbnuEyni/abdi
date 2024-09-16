@@ -6,7 +6,7 @@ from blog.models import Blog
 from doctor.models import Dentist
 
 # Create your views here.
-def doctors(requests):
+def doctors(requests): 
     slider = Slider.objects.all()
     sliders = slider[:1]
     dentists = Dentist.objects.all()

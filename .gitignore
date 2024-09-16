@@ -3,7 +3,9 @@ include/
 lib/
 lib64/
 pyvenv.cfg
+account/__pycache__/
 clinic/__pycache__/
 menan/__pycache__/
 doctor/__pycache__/
 service/__pycache__/
+.env

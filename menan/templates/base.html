@@ -40,13 +40,21 @@
 
             <div class="collapse navbar-collapse" id="ftco-nav">
                 <ul class="navbar-nav ml-auto">
-                <li class="nav-item active"><a href="{% url 'home' %}" class="nav-link">Home</a></li>
-                <li class="nav-item"><a href="{% url 'about' %}" class="nav-link">About</a></li>
-                <li class="nav-item"><a href="{% url 'services' %}" class="nav-link">Services</a></li>
-                <li class="nav-item"><a href="{% url 'doctor:doctors' %}" class="nav-link">Doctors</a></li>
-                <li class="nav-item"><a href="{% url 'blog:blog' %}" class="nav-link">Blog</a></li>
-                <li class="nav-item"><a href="{% url 'contact' %}" class="nav-link">Contact</a></li>
-                <li class="nav-item cta"><a href="{% url 'contact' %}" class="nav-link" data-toggle="modal" data-target="#modalRequest"><span>Make an Appointment</span></a></li>
+                    <li class="nav-item active"><a href="{% url 'home' %}" class="nav-link">Home</a></li>
+                    <li class="nav-item"><a href="{% url 'about' %}" class="nav-link">About</a></li>
+                    <li class="nav-item"><a href="{% url 'services' %}" class="nav-link">Services</a></li>
+                    <li class="nav-item"><a href="{% url 'doctor:doctors' %}" class="nav-link">Doctors</a></li>
+                    <li class="nav-item"><a href="{% url 'blog:blog' %}" class="nav-link">Blog</a></li>
+                    <li class="nav-item"><a href="{% url 'contact' %}" class="nav-link">Contact</a></li>
+                    <li class="nav-item cta"><a href="{% url 'contact' %}" class="nav-link" data-toggle="modal" data-target="#modalRequest"><span>Make an Appointment</span></a></li>
+                    {% if user.is_authenticated %}
+                        {% if user.is_superuser %}
+                            <li class="nav-item cta"><a href="{% url 'admin:index' %}" class="nav-link"><span>Admin</span></a></li>
+                        {% endif %}
+                        <li class="nav-item cta"><a href="{% url 'logout' %}" class="nav-link"><span>Logout</span></a></li>
+                    {% else %}
+                        <li class="nav-item cta"><a href="{% url 'login' %}" class="nav-link"><span>Login</span></a></li>
+                    {% endif %}
                 </ul>
             </div>
             </div>
@@ -97,17 +105,6 @@
                         </div>
                     </div>
                     {%endfor%}
-                    {% comment %} <div class="block-21 mb-4 d-flex">           
-                        <a class="blog-img mr-4" style="background-image: url({% static 'menanapp/images/image_2.jpg' %});"></a>
-                        <div class="text">
-                            <h3 class="heading"><a href="#">Even the all-powerful Pointing has no control about</a></h3>
-                            <div class="meta">
-                            <div><a href="#"><span class="icon-calendar"></span> Sept 15, 2018</a></div>
-                            <div><a href="#"><span class="icon-person"></span> Admin</a></div>
-                            <div><a href="#"><span class="icon-chat"></span> 19</a></div>
-                            </div>
-                        </div>
-                    </div> {% endcomment %}
                 </div>
                 </div>
                 <div class="col-md-3">
@@ -152,34 +149,32 @@
                 </button>
             </div>
             <div class="modal-body">
-                <form action="#">
+                <form action="{% url 'appointment' %}" class="appointment-form" method="post">
+                    {% csrf_token %}
                 <div class="form-group">
                     <!-- <label for="appointment_name" class="text-black">Full Name</label> -->
-                    <input type="text" class="form-control" id="appointment_name" placeholder="Full Name">
+                    <input type="text" class="form-control" name="name" id="appointment_name" placeholder="Full Name" required>
                 </div>
                 <div class="form-group">
                     <!-- <label for="appointment_email" class="text-black">Email</label> -->
-                    <input type="text" class="form-control" id="appointment_email" placeholder="Email">
+                    <input type="text" class="form-control" name="email" id="appointment_email" placeholder="Email" required>
                 </div>
-                <div class="row">
-                    <div class="col-md-6">
+                <div class="form-group">
+                    <input type="text" name="phone" class="form-control" id="phone" placeholder="Phone" required>
+                </div>
+                <div class="form-group">
+                    <!-- <label for="appointment_name" class="text-black">Department</label> -->
+                    <input type="text" class="form-control" name="department" id="department" placeholder="Department" required>
+                </div>
+                <div class="col-md-6">
                     <div class="form-group">
                         <!-- <label for="appointment_date" class="text-black">Date</label> -->
-                        <input type="text" class="form-control appointment_date" placeholder="Date">
+                        <input type="text" name="appointment_date" class="form-control appointment_date" placeholder="Date" required>
                     </div>    
-                    </div>
-                    <div class="col-md-6">
-                    <div class="form-group">
-                        <!-- <label for="appointment_time" class="text-black">Time</label> -->
-                        <input type="text" class="form-control appointment_time" placeholder="Time">
-                    </div>
-                    </div>
                 </div>
-                
-    
                 <div class="form-group">
                     <!-- <label for="appointment_message" class="text-black">Message</label> -->
-                    <textarea name="" id="appointment_message" class="form-control" cols="30" rows="10" placeholder="Message"></textarea>
+                    <textarea name="appointment_message" id="appointment_message" class="form-control" cols="30" rows="10" placeholder="Message"></textarea>
                 </div>
                 <div class="form-group">
                     <input type="submit" value="Make an Appointment" class="btn btn-primary">
@@ -206,9 +201,20 @@
         <script src="{% static 'menanapp/js/bootstrap-datepicker.js' %}"></script>
         <script src="{% static 'menanapp/js/jquery.timepicker.min.js' %}"></script>
         <script src="{% static 'menanapp/js/scrollax.min.js' %}"></script>
-        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>
+        <script src="https://maps.googleapis.com/maps/api/js?client=google-maps-embed&amp;paint_origin=&amp;libraries=geometry,search&amp;v=weekly&amp;loading=async&amp;language=en&amp;region=et&amp;callback=onApiLoad" nonce="" async="" defer=""></script>
         <script src="{% static 'menanapp/js/google-map.js' %}"></script>
         <script src="{% static 'menanapp/js/main.js' %}"></script>
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                {% if success_message %}
+                    $('#successModal').modal('show');
+                {% elif error_message %}
+                    $('#errorModal').modal('show');
+                {% endif %}
+            });
+        </script>
       
     </body>
   </html>
+
+  
