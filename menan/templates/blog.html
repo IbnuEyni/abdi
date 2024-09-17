@@ -26,7 +26,7 @@
                     {% for blog in page_obj %}
                     <div class="col-md-12 ftco-animate">
                         <div class="blog-entry">
-                            <a href="{% url 'blog:blog_detail' blog.id %}" class="block-20" style="background-image: url({{ blog.image.url }});"></a>
+                            <a href="{{blog.link}}" class="block-20" style="background-image: url({{ blog.image.url }});"></a>
                             <div class="text d-flex py-4">
                                 <div class="meta mb-3">
                                     <div><a href="#">{{ blog.created_at }}</a></div>
@@ -34,9 +34,9 @@
                                     <div><a href="#" class="meta-chat"><span class="icon-chat"></span> {{ blog.comments_count }}</a></div>
                                 </div>
                                 <div class="desc pl-sm-3 pl-md-5">
-                                    <h3 class="heading"><a href="{% url 'blog:blog_detail' blog.id %}">{{ blog.title }}</a></h3>
+                                    <h3 class="heading"><a href="{{blog.link}}">{{ blog.title }}</a></h3>
                                     <p>{{ blog.desc }}</p>
-                                    <p><a href="{% url 'blog:blog_detail' blog.id %}" class="btn btn-primary btn-outline-primary">Read more</a></p>
+                                    <p><a href="{{blog.link}}" class="btn btn-primary btn-outline-primary">Read more</a></p>
                                 </div>
                             </div>
                         </div>

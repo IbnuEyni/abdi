@@ -2,7 +2,7 @@ from django.db import models
 from menan.models import Category
 
 # Create your models here.
-class Blog(models.Model):
+class Blogs(models.Model):
     image = models.ImageField(upload_to='pics')
     title = models.CharField(max_length=255)
     desc = models.TextField()
@@ -10,6 +10,7 @@ class Blog(models.Model):
     created_at = models.DateField(auto_now_add=True)
     comments_count = models.IntegerField(default=0)
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
+    link = models.URLField(blank=True, null=True)
 
     def __str__(self):
         return self.title

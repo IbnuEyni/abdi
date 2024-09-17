@@ -4,14 +4,14 @@ from django.core.mail import send_mail
 
 from clinic import settings
 from service.models import Services
-from doctor.models import Achievements, Pricing, PriTitle
+from doctor.models import Achievements, Dentists, Pricing, PriTitle
 from .models import *
-from blog.models import Blog
+from blog.models import Blogs
 
 
 def home(requests):
     sliders = Slider.objects.all()
-    dents = Dentist.objects.all()
+    dents = Dentists.objects.all()
     tests = Testimonials.objects.all()
     contacts = Contact.objects.all()
     servs = Services.objects.all()
@@ -19,7 +19,7 @@ def home(requests):
     achievs = Achievements.objects.all() 
     pricings = Pricing.objects.all()
     pritits = PriTitle.objects.all()
-    blg = Blog.objects.all()
+    blg = Blogs.objects.all()
     blogs = blg[:4]
     blgs = blg[:2]
     sliderss = sliders[:1]
@@ -46,8 +46,8 @@ def contact(request):
     contacts = Contact.objects.all()
     map_settings = MapSettings.objects.first()  
     map_url = map_settings.map_url if map_settings else "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3940.1637489996847!2d38.7352157744991!3d9.048823788679371!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x164b8f74e36f9e2d%3A0xe052c08008eb85a6!2zRW5rdWxhbCBGYWJyaWNhIFNxdWFyZSB8IOGKpeGKleGJgeGIi-GIjSDhjYvhiaXhiKrhiqsg4Yqg4Yuw4Ymj4Ymj4Yut!5e0!3m2!1sen!2set!4v1704783423949!5m2!1sen!2set"
-    blg = Blog.objects.all()
-    blgs = blg[:2]
+    blg = Blogs.objects.all()
+    blgs = blg[:2] 
 
     if request.method == 'POST':
         message_name = request.POST.get('message-name')
@@ -105,7 +105,7 @@ def about(request):
     persons = Abt_Presonal.objects.all()
     tests = Testimonials.objects.all()
     achievs = Achievements.objects.all() 
-    blg = Blog.objects.all()
+    blg = Blogs.objects.all()
     blgs = blg[:2]
     contacts = Contact.objects.all()
     res = {
@@ -121,6 +121,35 @@ def about(request):
 
     }
     return render(request, 'about.html', res)
+
+def subscribe(request):
+    if request.method=='POST':
+        email = request.POST.get('email')
+        if not email:
+            return render(request, 'index.html', {
+                'success_message': None,
+                'error_message': 'All required fields must be filled out.'
+            })
+        try :
+            send_mail(
+                subject=f"New Subscription from {email}",
+                message=email,
+                from_email=email,
+                recipient_list=[settings.EMAIL_HOST_USER],
+                fail_silently=False,
+            )
+
+            return render(request, 'index.html', {
+                'success_message': f"Thank you, {email}. Your subscription has been made successfully.",
+                'error_message': None
+            })
+        except Exception as e:
+            return render(request, 'index.html', {
+                'success_message': None,
+                'error_message': f"An error occurred: {e}"
+            })
+    else:
+        return redirect('home')
 
 def make_appointment(request):
     if request.method == 'POST':

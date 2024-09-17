@@ -7,7 +7,7 @@ from . import views
 app_name = 'doctor'
 
 urlpatterns = [
-    path('', views.doctors, name='doctors'),
+    path('', views.doctors, name='doctors'), 
     path('<int:pk>', views.doctor_detail, name='doctor_detail')
 ]   
 # if settings.DEBUG:

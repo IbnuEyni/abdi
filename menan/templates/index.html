@@ -229,10 +229,10 @@
       					<div class="text">
 	        				<p>{{dent.desc}}</p>
 	        				<ul class="ftco-social">
-			              <li class="ftco-animate"><a href="#"><span class="icon-twitter"></span></a></li>
-			              <li class="ftco-animate"><a href="#"><span class="icon-facebook"></span></a></li>
-			              <li class="ftco-animate"><a href="#"><span class="icon-instagram"></span></a></li>
-			              <li class="ftco-animate"><a href="#"><span class="icon-google-plus"></span></a></li>
+			              <li class="ftco-animate"><a href={{dent.X}}><span class="icon-twitter"></span></a></li>
+			              <li class="ftco-animate"><a href={{dent.fb}}><span class="icon-facebook"></span></a></li>
+			              <li class="ftco-animate"><a href={{dent.insta}}><span class="icon-instagram"></span></a></li>
+			              <li class="ftco-animate"><a href={{dent.google}}><span class="icon-google-plus"></span></a></li>
 			            </ul>
 	        			</div>
       				</div>
@@ -343,12 +343,16 @@
               <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. Separated they live in</p>
               <div class="row d-flex justify-content-center mt-5">
                 <div class="col-md-8">
-                  <form action="#" class="subscribe-form">
-                    <div class="form-group d-flex">
-                      <input type="text" class="form-control" placeholder="Enter email address">
-                      <input type="submit" value="Subscribe" class="submit px-3">
-                    </div>
-                  </form>
+					<form action="{% url 'contact' %}" class="subscribe-form">
+						{% csrf_token %}
+						<div class="form-group d-flex">
+							<input type="email" name="message-email" class="form-control" placeholder="Enter email address">
+							
+							<div class="form-group">
+								<input type="submit" value="Send Message" class="btn btn-primary py-3 px-5">
+							</div>
+						</div>
+					</form>
                 </div>
               </div>
             </div>

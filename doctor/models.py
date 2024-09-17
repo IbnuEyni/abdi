@@ -2,15 +2,16 @@ from django.db import models
 
 # Create your models here.
 
-class Dentist(models.Model):
+class Dentists(models.Model):
     name = models.CharField(max_length=100)
     image = models.ImageField(upload_to='pics')
     desc = models.TextField()
     prof = models.CharField(max_length=100)
-    X = models.CharField(max_length=100)
-    fb = models.CharField(max_length=100)
-    insta = models.CharField(max_length=100)
-    google = models.CharField(max_length=100)
+    
+    X = models.URLField(blank=True, null=True)
+    fb = models.URLField(blank=True, null=True)
+    insta = models.URLField(blank=True, null=True)
+    google = models.URLField(blank=True, null=True)
 
 class DentTitle(models.Model):
     title = models.CharField(max_length=100)
@@ -18,7 +19,7 @@ class DentTitle(models.Model):
 
 class Pricing(models.Model):
     title = models.CharField(max_length=255)
-    price = models.FloatField()
+    price = models.FloatField() 
     opt1 =  models.CharField(max_length=100)
     opt2 =  models.CharField(max_length=100)
     opt3 =  models.CharField(max_length=100)

@@ -2,7 +2,7 @@ from django.shortcuts import render
 
 from .models import Services, Smile
 from menan.models import Slider, Contact
-from blog.models import Blog
+from blog.models import Blogs
 from doctor.models import Achievements, Pricing, PriTitle
 
 # Create your views here.
@@ -22,7 +22,7 @@ def services(request):
     logger.info(f"Services: {servs}")
     logger.info(f"Smiles: {smiles}")
     contacts = Contact.objects.all()
-    blg = Blog.objects.all()
+    blg = Blogs.objects.all()
     blgs = blg[:2]
 
     context = {"servs": servs, 

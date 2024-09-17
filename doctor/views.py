@@ -1,21 +1,20 @@
 from django.shortcuts import get_object_or_404, render
 
-from .models import Dentist, DentTitle, Pricing, PriTitle, Achievements
+from .models import Dentists, DentTitle, Pricing, PriTitle, Achievements
 from menan.models import Contact, Slider, Abt_Presonal
-from blog.models import Blog
-from doctor.models import Dentist
+from blog.models import Blogs
 
 # Create your views here.
 def doctors(requests): 
     slider = Slider.objects.all()
     sliders = slider[:1]
-    dentists = Dentist.objects.all()
+    dentists = Dentists.objects.all()
     docTitle = DentTitle.objects.all()
     pricings = Pricing.objects.all()
     pritits = PriTitle.objects.all()
     achievs = Achievements.objects.all() 
     contacts = Contact.objects.all()
-    blg = Blog.objects.all()
+    blg = Blogs.objects.all()
     blgs = blg[:2]
 
     res = {
@@ -34,13 +33,13 @@ def doctors(requests):
 def doctor_detail(request, pk):
     slider = Slider.objects.all()
     sliders = slider[:1]
-    dentists = Dentist.objects.all()
+    dentists = Dentists.objects.all()
     persons = Abt_Presonal.objects.all()
     contacts = Contact.objects.all()
-    blg = Blog.objects.all()
+    blg = Blogs.objects.all()
     blgs = blg[:2]
     if request.method == 'GET':
-        blog = get_object_or_404(Blog, pk=pk)
+        blog = get_object_or_404(Blogs, pk=pk)
         context = {
             'blog':blog,
             'sliders':sliders,
