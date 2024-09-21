@@ -29,7 +29,12 @@ SECRET_KEY = 'django-insecure-f=6==&pq7+q%squ7-t9)1x4_w4k#xo#_m81hhwm&rx)i+aiy(s
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['clinic.onrender.com']
+ALLOWED_HOSTS = [
+    'abdi-7hyc.onrender.com',  # Add your Render app URL
+    'localhost',
+    '127.0.0.1',
+    # Add any other domains you expect to serve
+]
 
 
 # Application definition
