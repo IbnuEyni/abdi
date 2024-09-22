@@ -28,9 +28,9 @@
       			<div class="about-wrap">
 					{%for person in persons%}
       				<div class="heading-section heading-section-white mb-5 ftco-animate">
-		            <h2 class="mb-2">{{person.abt_heading1}}</h2>
-		            <p>{{person.h1_desc}} </p>
-		          </div>
+						<h2 class="mb-2">{{person.abt_heading1}}</h2>
+						<p>{{person.h1_desc}} </p>
+		          	</div>
       				<div class="list-services d-flex ftco-animate">
       					<div class="icon d-flex justify-content-center align-items-center">
       						<span class="icon-check2"></span>
@@ -45,7 +45,7 @@
       						<span class="icon-check2"></span>
       					</div>
       					<div class="text">
-	      					<h3>High Technology Facilities {{person.heading22}} </h3>
+	      					<h3>{{person.heading22}} </h3>
 	      					<p>{{person.heading22_desc}} </p>
       					</div>
       				</div>
@@ -61,7 +61,7 @@
 					<p>{{dentist.desc}}</p>
 					<ul class="ftco-social">
 						<li class="ftco-animate"><a href="{{dentist.X}}"><span class="icon-twitter"></span></a></li>
-						<li class="ftco-animate"><a href="http://facebook.com/johndo"><span class="icon-facebook"></span></a></li>
+						<li class="ftco-animate"><a href="{{dentist.fb}}"><span class="icon-facebook"></span></a></li>
 						<li class="ftco-animate"><a href="{{dentist.insta}}"><span class="icon-instagram"></span></a></li>
 						<li class="ftco-animate"><a href="{{dentist.google}}"><span class="icon-google-plus"></span></a></li>
 					</ul>

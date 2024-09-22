@@ -224,7 +224,7 @@
       				<div class="img mb-4" style="background-image: url({{dent.image.url}});">
 					</div>
       				<div class="info text-center">
-      					<h3><a href="teacher-single.html">{{dent.name}}</a></h3>
+      					<h3><a href="{{dent.fb}}">{{dent.name}}</a></h3>
       					<span class="position">{{dent.prof}}</span>
       					<div class="text">
 	        				<p>{{dent.desc}}</p>
@@ -242,7 +242,7 @@
         </div>
         <div class="row  mt-5 justify-conten-center">
         	<div class="col-md-8 ftco-animate">
-        		<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Animi vero accusantium sunt sit aliquam ipsum molestias autem perferendis, incidunt cumque necessitatibus cum amet cupiditate, ut accusamus. Animi, quo. Laboriosam, laborum.</p>
+        		<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Animi vero accusantium ቸገሸበነቸጀከሐቨበ ሰጀከነበቸጀጀከ ሀጀሀበከጀበ</p>
         	</div>
         </div>
       </div>
@@ -441,16 +441,16 @@
 			{% for blog in blogs %}
           <div class="col-md-4 ftco-animate">
             <div class="blog-entry">
-              <a href="blog-single.html" class="block-20" style="background-image: url({{blog.image.url}});">
+              <a href="{{blog.link}}" class="block-20" style="background-image: url({{blog.image.url}});">
               </a>
               <div class="text d-flex py-4">
                 <div class="meta mb-3">
-                  <div><a href="#">{{blog.created_at}}</a></div>
-                  <div><a href="#">{{blog.author	}}</a></div>
-                  <div><a href="#" class="meta-chat"><span class="icon-chat"></span> {{blog.comments_count}}</a></div>
+                  <div><a href="{{blog.link}}">{{blog.created_at}}</a></div>
+                  <div><a href="{{blog.link}}">{{blog.author	}}</a></div>
+                  <div><a href="{{blog.link}}" class="meta-chat"><span class="icon-chat"></span> {{blog.comments_count}}</a></div>
                 </div>
                 <div class="desc pl-3">
-	                <h3 class="heading"><a href="#">{{blog.desc}}</a></h3>
+	                <h3 class="heading"><a href="{{blog.link}}">{{blog.desc}}</a></h3>
 	              </div>
               </div>
             </div>
@@ -465,7 +465,7 @@
     		<div class="row">
     			<div class="col-md-6 pr-md-5 aside-stretch py-5 choose">
     				<div class="heading-section heading-section-white mb-5 ftco-animate">
-	            <h2 class="mb-2">DentaCare Procedure &amp; High Quality Services</h2>
+	            <h2 class="mb-2">Dr. Abdi Procedure &amp; High Quality Services</h2>
 	          </div>
 	          <div class="ftco-animate">
 	          	<p>Even the all-powerful Pointing has no control about the blind texts it is an almost unorthographic life One day however a small line of blind text by the name of Lorem Ipsum decided to leave for the far World of Grammar. Because there were thousands of bad Commas, wild Question Marks and devious Semikoli</p>
